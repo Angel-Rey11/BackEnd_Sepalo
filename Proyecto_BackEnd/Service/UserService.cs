@@ -61,5 +61,10 @@ namespace Proyecto_BackEnd.Service
         {
             return _repository.GetAll();
         }
+
+        public void delete(int id)
+        {
+            _repository.Delete(id);
+        }
     }
 }

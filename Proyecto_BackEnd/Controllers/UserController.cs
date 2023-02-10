@@ -22,8 +22,7 @@ namespace Proyecto_BackEnd.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        [Route("GetAll")]
+        [HttpGet("GetAll")]
         public List<UserModel> GetUsers()
         {
             return _userService.GetAll();
@@ -40,6 +39,12 @@ namespace Proyecto_BackEnd.Controllers
         public UserModel GetUser(string username, string password)
         {
             return _userService.get(username, password);
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public void DeleteUser(int id)
+        {
+            _userService.delete(id);
         }
     }
 }

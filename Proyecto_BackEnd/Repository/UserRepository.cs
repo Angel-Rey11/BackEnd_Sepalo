@@ -33,5 +33,11 @@ namespace Proyecto_BackEnd.Repository
                 return null;
             }
         }
+
+        public void Delete(int id)
+        {
+            _dbContext.Users.Remove(_dbContext.Users.FirstOrDefault(u => u.id == id));
+            _dbContext.SaveChanges();
+        }
     }
 }

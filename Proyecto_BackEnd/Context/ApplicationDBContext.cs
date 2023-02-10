@@ -10,5 +10,7 @@ namespace Proyecto_BackEnd.Context
         }
 
         public DbSet<UserModel> Users { get; set; }
+        public DbSet<CajeroModel> Cashiers { get; set; }
+        public DbSet<CallModel> Calls { get; set; }
     }
 }

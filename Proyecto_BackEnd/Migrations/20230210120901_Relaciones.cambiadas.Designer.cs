@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using Proyecto_BackEnd.Context;
@@ -11,9 +12,11 @@ using Proyecto_BackEnd.Context;
 namespace ProyectoBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230210120901_Relaciones.cambiadas")]
+    partial class Relacionescambiadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,27 +62,33 @@ namespace ProyectoBackEnd.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int?>("cajeroid")
+                        .HasColumnType("NUMBER(10)");
+
                     b.Property<DateTime>("date")
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("estado")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("id_cajero")
+                    b.Property<int>("id_cajero")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("id_user")
+                    b.Property<int>("id_user")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("p2p")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
+                    b.Property<int?>("userid")
+                        .HasColumnType("NUMBER(10)");
+
                     b.HasKey("id");
 
-                    b.HasIndex("id_cajero");
+                    b.HasIndex("cajeroid");
 
-                    b.HasIndex("id_user");
+                    b.HasIndex("userid");
 
                     b.ToTable("Calls");
                 });
@@ -109,11 +118,11 @@ namespace ProyectoBackEnd.Migrations
                 {
                     b.HasOne("Proyecto_BackEnd.Model.CajeroModel", "cajero")
                         .WithMany("calls")
-                        .HasForeignKey("id_cajero");
+                        .HasForeignKey("cajeroid");
 
                     b.HasOne("Proyecto_BackEnd.Model.UserModel", "user")
                         .WithMany("calls")
-                        .HasForeignKey("id_user");
+                        .HasForeignKey("userid");
 
                     b.Navigation("cajero");
 
