@@ -12,10 +12,7 @@ namespace Proyecto_BackEnd.Model
         public string p2p { get; set; }
         public Estado estado { get; set; }
         public DateTime date { get; set; }
-        public int UserId { get; set; }
-        public UserModel User { get; set; }
         public int CajeroId { get; set; }
-        public CajeroModel Cajero { get; set; }
-
+        public int UserId { get; set; }
     }
 }

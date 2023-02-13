@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using Proyecto_BackEnd.Context;
@@ -11,9 +12,11 @@ using Proyecto_BackEnd.Context;
 namespace ProyectoBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230213122405_cambios9")]
+    partial class cambios9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,17 +113,31 @@ namespace ProyectoBackEnd.Migrations
 
             modelBuilder.Entity("Proyecto_BackEnd.Model.CallModel", b =>
                 {
-                    b.HasOne("Proyecto_BackEnd.Model.CajeroModel", null)
-                        .WithMany()
+                    b.HasOne("Proyecto_BackEnd.Model.CajeroModel", "Cajero")
+                        .WithMany("calls")
                         .HasForeignKey("CajeroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Proyecto_BackEnd.Model.UserModel", null)
-                        .WithMany()
+                    b.HasOne("Proyecto_BackEnd.Model.UserModel", "User")
+                        .WithMany("calls")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cajero");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Proyecto_BackEnd.Model.CajeroModel", b =>
+                {
+                    b.Navigation("calls");
+                });
+
+            modelBuilder.Entity("Proyecto_BackEnd.Model.UserModel", b =>
+                {
+                    b.Navigation("calls");
                 });
 #pragma warning restore 612, 618
         }

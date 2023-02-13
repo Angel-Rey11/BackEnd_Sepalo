@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 
 namespace Proyecto_BackEnd.Model
 {
@@ -14,7 +13,6 @@ namespace Proyecto_BackEnd.Model
         public string ubication { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public virtual List<CallModel> calls { get; set; }
         
     }
 }

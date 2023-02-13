@@ -26,5 +26,11 @@ namespace Proyecto_BackEnd.Controllers
         {
             return _call.GetAll();
         }
+
+        [HttpPut("Update")]
+        public void Update([FromBody] CallModel c)
+        {
+            _call.Update(c);
+        }
     }
 }

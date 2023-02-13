@@ -21,5 +21,10 @@ namespace Proyecto_BackEnd.Service
         {
             return _repository.GetAll();
         }
+
+        public void Update(CallModel c)
+        {
+            _repository.Update(c);
+        }
     }
 }

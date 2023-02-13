@@ -33,6 +33,12 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseOracle
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<UserController>();
+builder.Services.AddScoped<CajeroRepository>();
+builder.Services.AddScoped<CajeroService>();
+builder.Services.AddScoped<CajeroController>();
+builder.Services.AddScoped<CallRepository>();
+builder.Services.AddScoped<CallService>();
+builder.Services.AddScoped<CallController>();
 
 var app = builder.Build();
 

@@ -19,15 +19,15 @@ namespace Proyecto_BackEnd.Context
                 .HasIndex(u => u.ip)
                 .IsUnique();
 
-            builder.Entity<CajeroModel>()
-                .HasMany(p => p.calls)
-                .WithOne(c => c.Cajero)
-                .HasForeignKey(c => c.CajeroId);
+            builder.Entity<CallModel>()
+                .HasOne<UserModel>()
+                .WithMany()
+                .HasForeignKey(p => p.UserId);
 
-            builder.Entity<UserModel>()
-                .HasMany(p => p.calls)
-                .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId);
+            builder.Entity<CallModel>()
+                .HasOne<CajeroModel>()
+                .WithMany()
+                .HasForeignKey(p => p.CajeroId);
         }
     }
 }
