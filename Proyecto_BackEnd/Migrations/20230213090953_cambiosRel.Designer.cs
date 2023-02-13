@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using Proyecto_BackEnd.Context;
@@ -11,9 +12,11 @@ using Proyecto_BackEnd.Context;
 namespace ProyectoBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230213090953_cambiosRel")]
+    partial class cambiosRel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,21 +113,21 @@ namespace ProyectoBackEnd.Migrations
 
             modelBuilder.Entity("Proyecto_BackEnd.Model.CallModel", b =>
                 {
-                    b.HasOne("Proyecto_BackEnd.Model.CajeroModel", "Cajero")
+                    b.HasOne("Proyecto_BackEnd.Model.CajeroModel", "cajero")
                         .WithMany("calls")
                         .HasForeignKey("CajeroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Proyecto_BackEnd.Model.UserModel", "User")
+                    b.HasOne("Proyecto_BackEnd.Model.UserModel", "user")
                         .WithMany("calls")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cajero");
+                    b.Navigation("cajero");
 
-                    b.Navigation("User");
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Proyecto_BackEnd.Model.CajeroModel", b =>

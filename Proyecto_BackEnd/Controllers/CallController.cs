@@ -1,6 +1,30 @@
-﻿namespace Proyecto_BackEnd.Controllers
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Proyecto_BackEnd.Model;
+using Proyecto_BackEnd.Service;
+
+namespace Proyecto_BackEnd.Controllers
 {
-    public class CallController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CallController : ControllerBase
     {
+        public readonly CallService _call;
+        public CallController(CallService callService)
+        {
+            _call = callService;
+        }
+
+        [HttpPost]
+        public void insert([FromBody] CallModel c)
+        {
+            _call.Insert(c);
+        }
+
+        [HttpGet("GetAll")]
+        public List<CallModel> GetAll()
+        {
+            return _call.GetAll();
+        }
     }
 }

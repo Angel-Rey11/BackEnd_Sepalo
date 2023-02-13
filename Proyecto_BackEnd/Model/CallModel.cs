@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Proyecto_BackEnd.Model
 {
@@ -11,11 +12,10 @@ namespace Proyecto_BackEnd.Model
         public string p2p { get; set; }
         public Estado estado { get; set; }
         public DateTime date { get; set; }
-
-        [ForeignKey("id_user")]
-        public virtual UserModel? user { get; set; }
-        [ForeignKey("id_cajero")]
-        public virtual CajeroModel? cajero { get; set; }
+        public int UserId { get; set; }
+        public UserModel User { get; set; }
+        public int CajeroId { get; set; }
+        public CajeroModel Cajero { get; set; }
 
     }
 }
