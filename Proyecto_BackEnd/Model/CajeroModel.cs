@@ -14,7 +14,6 @@ namespace Proyecto_BackEnd.Model
         public string ubication { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-
         public virtual List<CallModel> calls { get; set; }
         
     }
