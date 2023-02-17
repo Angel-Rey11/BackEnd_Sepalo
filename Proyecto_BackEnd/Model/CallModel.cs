@@ -13,6 +13,6 @@ namespace Proyecto_BackEnd.Model
         public Estado estado { get; set; }
         public DateTime date { get; set; }
         public int CajeroId { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }

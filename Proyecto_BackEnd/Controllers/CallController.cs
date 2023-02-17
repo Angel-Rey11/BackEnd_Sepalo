@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.OpenApi.Any;
+using Proyecto_BackEnd.HubConfig;
 using Proyecto_BackEnd.Model;
 using Proyecto_BackEnd.Service;
 
@@ -10,15 +13,25 @@ namespace Proyecto_BackEnd.Controllers
     public class CallController : ControllerBase
     {
         public readonly CallService _call;
-        public CallController(CallService callService)
+        private readonly IHubContext<CallHub> _hub;
+        public CallController(CallService callService, IHubContext<CallHub> hub)
         {
             _call = callService;
+            _hub = hub;
         }
 
         [HttpPost]
         public void insert([FromBody] CallModel c)
         {
             _call.Insert(c);
+            List<CallModel> list = _call.GetAll();
+            sendMessage(list);
+
+        }
+        [NonAction]
+        public void sendMessage(List<CallModel> data)
+        {
+            _hub.Clients.All.SendAsync("TransferChartData", data);
         }
 
         [HttpGet("GetAll")]
@@ -27,10 +40,23 @@ namespace Proyecto_BackEnd.Controllers
             return _call.GetAll();
         }
 
-        [HttpPut("Update")]
-        public void Update([FromBody] CallModel c)
+        [HttpPut("Update/{id}")]
+        public void Update(int id, [FromBody] CallModel c)
         {
-            _call.Update(c);
+            _call.Update(id, c);
         }
+
+        [HttpGet("get/{id}")]
+        public CallModel CallModelGet(int id)
+        {
+            return _call.Get(id);
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public void Delete(int id)
+        {
+            _call.Delete(id);
+        }
+
     }
 }

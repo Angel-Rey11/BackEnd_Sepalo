@@ -23,9 +23,9 @@ namespace Proyecto_BackEnd.Repository
             return _dbContext.Calls.ToList();
         }
 
-        public void Update (CallModel c)
+        public void Update (int id, CallModel c)
         {
-            var aux = get(c.id);
+            CallModel aux = _dbContext.Calls.FirstOrDefault(p => p.id == id);
             if (aux != null)
             {
                 aux.p2p = c.p2p;
@@ -49,6 +49,12 @@ namespace Proyecto_BackEnd.Repository
             {
                 return null;
             }
+        }
+
+        public void Delete(int id)
+        {
+            _dbContext.Calls.Remove(_dbContext.Calls.FirstOrDefault(u => u.id == id));
+            _dbContext.SaveChanges();
         }
     }
 }

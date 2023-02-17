@@ -22,9 +22,19 @@ namespace Proyecto_BackEnd.Service
             return _repository.GetAll();
         }
 
-        public void Update(CallModel c)
+        public void Update(int id, CallModel c)
         {
-            _repository.Update(c);
+            _repository.Update(id, c);
+        }
+
+        public CallModel Get(int id)
+        {
+           return _repository.get(id);
+        }
+
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
         }
     }
 }
