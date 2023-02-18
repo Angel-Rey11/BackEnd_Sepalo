@@ -20,7 +20,7 @@ namespace Proyecto_BackEnd.HubConfig
         {
             Console.WriteLine("Cliente Conectado");
             //podemos devolver la lista
-           await this.Clients.All.SendAsync("TransferChartData", this.callService.GetAll()); 
+           await this.Clients.All.SendAsync("TransferChartData", this.callService.GetAllByEstado0());
         }
         public override async Task OnDisconnectedAsync(Exception? ex)
         {

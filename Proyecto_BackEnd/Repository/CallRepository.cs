@@ -19,10 +19,17 @@ namespace Proyecto_BackEnd.Repository
             _dbContext.SaveChanges();   
         }
 
-        public List<CallModel> GetAll()
+        public List<CallModel> GetAllByEstado0()
         {
             List<CallModel> aux = _dbContext.Calls.ToList();
-            return aux.OrderByDescending(x => x.date).ToList();
+            return aux.OrderByDescending(x => x.date)
+                .Where(x => x.estado == Estado.Calling)
+                .ToList();
+        }
+
+        public List<CallModel> GetAll()
+        {
+            return _dbContext.Calls.ToList();
         }
 
         public void Update (int id, CallModel c)

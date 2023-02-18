@@ -17,6 +17,11 @@ namespace Proyecto_BackEnd.Service
             _repository.Insert(c);
         }
 
+        public List<CallModel> GetAllByEstado0()
+        {
+            return _repository.GetAllByEstado0();
+        }
+
         public List<CallModel> GetAll()
         {
             return _repository.GetAll();

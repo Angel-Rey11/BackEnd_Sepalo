@@ -24,7 +24,7 @@ namespace Proyecto_BackEnd.Controllers
         public void insert([FromBody] CallModel c)
         {
             _call.Insert(c);
-            List<CallModel> list = _call.GetAll();
+            List<CallModel> list = _call.GetAllByEstado0();
             sendMessage(list);
 
         }
@@ -32,6 +32,12 @@ namespace Proyecto_BackEnd.Controllers
         public void sendMessage(List<CallModel> data)
         {
             _hub.Clients.All.SendAsync("TransferChartData", data);
+        }
+
+        [HttpGet("GetAllByEstado0")]
+        public List<CallModel> GetAllByEstado0()
+        {
+            return _call.GetAllByEstado0();
         }
 
         [HttpGet("GetAll")]
@@ -44,6 +50,8 @@ namespace Proyecto_BackEnd.Controllers
         public void Update(int id, [FromBody] CallModel c)
         {
             _call.Update(id, c);
+            List<CallModel> list = _call.GetAllByEstado0();
+            sendMessage(list);
         }
 
         [HttpGet("get/{id}")]
@@ -56,6 +64,8 @@ namespace Proyecto_BackEnd.Controllers
         public void Delete(int id)
         {
             _call.Delete(id);
+            List<CallModel> list = _call.GetAllByEstado0();
+            sendMessage(list);
         }
 
     }
