@@ -1,5 +1,6 @@
 ﻿using Proyecto_BackEnd.Context;
 using Proyecto_BackEnd.Model;
+using System.Collections.Generic;
 
 namespace Proyecto_BackEnd.Repository
 {
@@ -20,7 +21,8 @@ namespace Proyecto_BackEnd.Repository
 
         public List<CallModel> GetAll()
         {
-            return _dbContext.Calls.ToList();
+            List<CallModel> aux = _dbContext.Calls.ToList();
+            return aux.OrderByDescending(x => x.date).ToList();
         }
 
         public void Update (int id, CallModel c)
