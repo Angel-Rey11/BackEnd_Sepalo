@@ -67,6 +67,11 @@ namespace Proyecto_BackEnd.Controllers
             List<CallModel> list = _call.GetAllByEstado0();
             sendMessage(list);
         }
+        [HttpDelete("DeleteAll")]
+        public void DeleteAll()
+        {
+            _call.DeleteAll();
+        }
 
     }
 }

@@ -26,5 +26,11 @@ namespace Proyecto_BackEnd.Controllers
         {
             _cajeroService.Insert(model);
         }
+
+        [HttpGet("get/{id}")]
+        public CajeroModel Get(int id)
+        {
+            return _cajeroService.GetById(id);
+        }
     }
 }

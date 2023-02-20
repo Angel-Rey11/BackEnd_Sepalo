@@ -21,5 +21,19 @@ namespace Proyecto_BackEnd.Repository
         {
             return _dbContext.Cashiers.ToList();
         }
+
+        public CajeroModel Get(int id)
+        {
+            var aux = new CajeroModel();
+            aux = _dbContext.Cashiers.FirstOrDefault(u => u.id == id);
+            if (aux != null)
+            {
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
