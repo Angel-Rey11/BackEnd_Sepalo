@@ -21,11 +21,12 @@ namespace Proyecto_BackEnd.Controllers
         }
 
         [HttpPost]
-        public void insert([FromBody] CallModel c)
+        public CallModel insert([FromBody] CallModel c)
         {
-            _call.Insert(c);
+            var c2=_call.Insert(c);
             List<CallModel> list = _call.GetAllByEstado0();
             sendMessage(list);
+            return c2;
 
         }
         [NonAction]

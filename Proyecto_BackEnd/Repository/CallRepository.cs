@@ -13,9 +13,8 @@ namespace Proyecto_BackEnd.Repository
             _dbContext = applicationDBContext;
         }
 
-        public void Insert(CallModel c)
+        public CallModel Insert(CallModel c)
         {
- 
             CallModel cold = _dbContext.Calls.FirstOrDefault(p => p.CajeroId == c.CajeroId && p.estado == 0);
             if(cold != null)
             {
@@ -23,6 +22,7 @@ namespace Proyecto_BackEnd.Repository
             }
             _dbContext.Calls.Add(c);
             _dbContext.SaveChanges();
+            return c;
         }
             
 

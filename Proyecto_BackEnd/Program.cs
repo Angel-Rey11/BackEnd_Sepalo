@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
 using Proyecto_BackEnd.Context;
 using Proyecto_BackEnd.Controllers;
@@ -6,6 +9,7 @@ using Proyecto_BackEnd.Model;
 using Proyecto_BackEnd.Repository;
 using Proyecto_BackEnd.Service;
 using System.Configuration;
+using System.Net;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -22,8 +26,6 @@ builder.Services.AddCors(options =>
                           policy.AllowCredentials();
                       });
 });
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,6 +46,7 @@ builder.Services.AddScoped<CallService>();
 builder.Services.AddScoped<CallController>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

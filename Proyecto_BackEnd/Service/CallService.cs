@@ -12,9 +12,9 @@ namespace Proyecto_BackEnd.Service
             _repository = repository;
         }
 
-        public void Insert(CallModel c)
+        public CallModel Insert(CallModel c)
         {
-            _repository.Insert(c);
+            return _repository.Insert(c);
         }
 
         public List<CallModel> GetAllByEstado0()
