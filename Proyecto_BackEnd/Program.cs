@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:4200");
+                          policy.WithOrigins("http://localhost:4200", "https://localhost:5100", "https://0.0.0.0:5100", "https://localhost:5000", "https://0.0.0.0:5000");
                           policy.WithHeaders("*");
                           policy.WithMethods("*");
                           policy.AllowCredentials();
@@ -56,10 +56,27 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors();
 app.MapControllers();
 app.MapHub<CallHub>("/call");
+/*app.Use(async (context, next) =>
+{
+    // Log incoming request
+    Console.WriteLine($"Incoming request: {context.Request.Host.ToString}");
+
+    // Call the next middleware in the pipeline
+    await next.Invoke();
+
+    // Log the outgoing response
+    Console.WriteLine($"Outgoing response: {context.Response.StatusCode}");
+});*/
+
+
+
+
+
+
 app.UseCors(MyAllowSpecificOrigins);
+app.UseRouting();
 app.UseAuthorization();
 app.UseWebSockets();
 
